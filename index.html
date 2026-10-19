@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10152c">
+  <title>Chúc mừng chị em phụ nữ · 20/10</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      --cream: #fff6e9;
+      --gold: #f4cd83;
+      --ink: #352b34;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      overflow-x: hidden;
+      color: #fff8ee;
+      background:
+        radial-gradient(ellipse at 50% 105%, #51416a 0, transparent 46%),
+        radial-gradient(ellipse at 12% 12%, #222644 0, transparent 45%),
+        linear-gradient(155deg, #11152d 8%, #20213e 54%, #342743);
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: radial-gradient(1px 1px at 15% 24%, #fff 70%, transparent),
+        radial-gradient(1px 1px at 76% 14%, #fff 70%, transparent),
+        radial-gradient(1.5px 1.5px at 86% 49%, #fff 70%, transparent),
+        radial-gradient(1px 1px at 24% 68%, #fff 70%, transparent),
+        radial-gradient(1px 1px at 65% 80%, #fff 70%, transparent),
+        radial-gradient(1px 1px at 43% 37%, #fff 70%, transparent);
+      background-size: 240px 210px;
+      content: "";
+      opacity: .46;
+      pointer-events: none;
+    }
+
+    #fireworks {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      min-height: 100vh;
+      min-height: 100svh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px 78px;
+      text-align: center;
+    }
+
+    .intro {
+      margin-bottom: 25px;
+      animation: appear .9s both;
+    }
+
+    .eyebrow {
+      margin: 0 0 11px;
+      color: var(--gold);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.35rem, 7vw, 4.7rem);
+      font-weight: 700;
+      letter-spacing: -.045em;
+      line-height: 1.08;
+      text-shadow: 0 4px 30px #f2bd6a38;
+    }
+
+    h1 span { color: var(--gold); }
+
+    .subtitle {
+      margin: 13px 0 0;
+      color: #ded7e4;
+      font-size: clamp(.88rem, 2vw, 1rem);
+      letter-spacing: .045em;
+    }
+
+    .card-wrap {
+      position: relative;
+      width: min(100%, 440px);
+      animation: rise .9s .12s both;
+    }
+
+    .flower {
+      position: absolute;
+      z-index: 2;
+      font-size: 2.35rem;
+      filter: drop-shadow(0 5px 12px #0005);
+      animation: sway 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .flower-one { top: -20px; left: -19px; transform: rotate(-18deg); }
+    .flower-two { top: 33px; right: -18px; font-size: 2rem; animation-delay: -1.3s; }
+    .flower-three { right: 9px; bottom: -19px; font-size: 2.3rem; animation-delay: -2.1s; }
+    .flower-four { bottom: 21px; left: -22px; font-size: 1.8rem; animation-delay: -.7s; }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: 37px 35px 32px;
+      border: 1px solid #fff3d88c;
+      border-radius: 7px 7px 20px 7px;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 0 0, #fff 0, transparent 45%),
+        linear-gradient(145deg, #fffaf1, #f4e8d5);
+      box-shadow: 0 24px 80px #07091870, 0 2px 5px #fff5 inset;
+      text-align: left;
+    }
+
+    .card::after {
+      position: absolute;
+      right: -44px;
+      bottom: -56px;
+      width: 150px;
+      height: 150px;
+      border: 1px solid #d1a45d38;
+      border-radius: 50%;
+      box-shadow: 0 0 0 12px #d1a45d0c, 0 0 0 24px #d1a45d0a;
+      content: "";
+      pointer-events: none;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 23px;
+      color: #a77e4c;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .card-top::before, .card-top::after {
+      height: 1px;
+      flex: 1;
+      background: #d7bf9d;
+      content: "";
+    }
+
+    .card h2 {
+      margin: 0 0 15px;
+      color: #493348;
+      font-size: clamp(1.55rem, 5vw, 2rem);
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .message {
+      margin: 0;
+      color: #635765;
+      font-size: 1rem;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .signature {
+      margin: 19px 0 0;
+      color: #a77e4c;
+      font-size: 1.1rem;
+      font-style: italic;
+      text-align: right;
+    }
+
+    .open-button {
+      display: flex;
+      min-height: 47px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin: 25px auto 0;
+      padding: 0 20px;
+      border: 1px solid #8c6746;
+      border-radius: 999px;
+      color: #fff8ee;
+      background: #5a4158;
+      box-shadow: 0 6px 16px #422b442c;
+      cursor: pointer;
+      font: inherit;
+      font-size: .88rem;
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .open-button:hover {
+      transform: translateY(-2px);
+      background: #704c67;
+      box-shadow: 0 9px 22px #422b4440;
+    }
+
+    .open-button:focus-visible {
+      outline: 3px solid #d4a75e;
+      outline-offset: 4px;
+    }
+
+    .card.is-open {
+      animation: card-glow .8s ease-out;
+    }
+
+    .hint {
+      margin: 17px 0 0;
+      color: #d8cddd;
+      font-size: .8rem;
+      letter-spacing: .025em;
+    }
+
+    footer {
+      position: absolute;
+      right: 16px;
+      bottom: 18px;
+      left: 16px;
+      color: #c9bdcf;
+      font-size: .73rem;
+      letter-spacing: .08em;
+      opacity: .8;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes sway {
+      0%, 100% { translate: 0 0; rotate: 0deg; }
+      50% { translate: 0 -6px; rotate: 5deg; }
+    }
+
+    @keyframes card-glow {
+      45% { box-shadow: 0 24px 90px #f2bd6a38, 0 2px 5px #fff5 inset; }
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 36px 20px 70px; }
+      .intro { margin-bottom: 22px; }
+      .card { padding: 31px 24px 27px; }
+      .flower-one { left: -13px; }
+      .flower-two { right: -11px; }
+      .flower-four { left: -15px; }
+      .flower { font-size: 1.9rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="fireworks" aria-hidden="true"></canvas>
+  <main>
+    <header class="intro">
+      <p class="eyebrow">Ngày Phụ nữ Việt Nam · 20 tháng 10</p>
+      <h1>Rạng rỡ như <span>hoa</span></h1>
+      <p class="subtitle">Gửi những lời yêu thương đến chị em phụ nữ</p>
+    </header>
+
+    <section class="card-wrap" aria-label="Thiệp chúc mừng ngày Phụ nữ Việt Nam">
+      <span class="flower flower-one" aria-hidden="true">🌸</span>
+      <span class="flower flower-two" aria-hidden="true">🌼</span>
+      <span class="flower flower-three" aria-hidden="true">🌷</span>
+      <span class="flower flower-four" aria-hidden="true">🌺</span>
+      <article class="card" id="greeting-card">
+        <div class="card-top">Thân thương gửi chị</div>
+        <h2>Chúc chị em phụ nữ<br>ngày 20/10 thật vui!</h2>
+        <p class="message">
+          Chúc những người phụ nữ tuyệt vời luôn rạng rỡ,
+          tự tin và ngập tràn yêu thương trong mỗi ngày.
+          <br><br>
+          Mong mọi điều dịu dàng và hạnh phúc nhất
+          sẽ luôn ở bên chị em!
+        </p>
+        <p class="signature">Thương chúc chị em ♡</p>
+        <button class="open-button" id="wish-button" type="button">
+          <span aria-hidden="true">✨</span>
+          <span id="button-label">Gửi lời chúc &amp; thắp pháo hoa</span>
+        </button>
+      </article>
+      <p class="hint" id="wish-hint" aria-live="polite">Nhấn nút để gửi lời chúc đến chị em</p>
+    </section>
+
+    <footer>20 · 10 &nbsp; ✦ &nbsp; Chúc chị em luôn rạng rỡ</footer>
+  </main>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById("fireworks");
+      const context = canvas.getContext("2d");
+      const button = document.getElementById("wish-button");
+      const card = document.getElementById("greeting-card");
+      const hint = document.getElementById("wish-hint");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const particles = [];
+      const colors = ["#ffd98a", "#ff9c9c", "#b8a5ff", "#a7ecd4", "#fff1dc"];
+      let width = 0;
+      let height = 0;
+      let lastLaunch = 0;
+      let animationFrame;
+
+      function resizeCanvas() {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      }
+
+      function burst(x, y, count = 48) {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        for (let index = 0; index < count; index += 1) {
+          const angle = (Math.PI * 2 * index) / count + Math.random() * 0.12;
+          const speed = 1.1 + Math.random() * 3.8;
+          particles.push({
+            x, y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: 55 + Math.random() * 35,
+            size: 1.2 + Math.random() * 1.7,
+            color
+          });
+        }
+      }
+
+      function animate() {
+        context.clearRect(0, 0, width, height);
+        for (let index = particles.length - 1; index >= 0; index -= 1) {
+          const particle = particles[index];
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          particle.vy += 0.035;
+          particle.vx *= 0.99;
+          particle.vy *= 0.99;
+          particle.life -= 1;
+
+          if (particle.life <= 0) {
+            particles.splice(index, 1);
+            continue;
+          }
+
+          context.globalAlpha = Math.min(1, particle.life / 24);
+          context.fillStyle = particle.color;
+          context.beginPath();
+          context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          context.fill();
+        }
+        context.globalAlpha = 1;
+        animationFrame = window.requestAnimationFrame(animate);
+      }
+
+      function launchCelebration() {
+        const now = Date.now();
+        if (now - lastLaunch < 700) return;
+        lastLaunch = now;
+
+        if (reducedMotion.matches) {
+          burst(width / 2, height * 0.3, 24);
+          for (const particle of particles) particle.life = 10;
+          if (!animationFrame) animate();
+          return;
+        }
+
+        burst(width * (0.2 + Math.random() * 0.6), height * (0.16 + Math.random() * 0.32));
+        window.setTimeout(() => burst(width * (0.2 + Math.random() * 0.6), height * (0.16 + Math.random() * 0.32), 38), 230);
+        window.setTimeout(() => burst(width * (0.2 + Math.random() * 0.6), height * (0.16 + Math.random() * 0.32), 42), 490);
+      }
+
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+      animate();
+
+      button.addEventListener("click", () => {
+        card.classList.remove("is-open");
+        void card.offsetWidth;
+        card.classList.add("is-open");
+        hint.textContent = "Lời chúc đã được gửi — chúc chị em ngày 20/10 thật rạng rỡ! ✨";
+        launchCelebration();
+      });
+
+      window.setTimeout(() => {
+        burst(width * 0.22, height * 0.24, 34);
+        burst(width * 0.79, height * 0.2, 34);
+      }, 700);
+    })();
+  </script>
+</body>
+</html>
