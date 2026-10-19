@@ -104,6 +104,7 @@
     .card-wrap {
       position: relative;
       width: min(100%, 440px);
+      perspective: 1400px;
       animation: rise .9s .12s both;
     }
 
@@ -123,16 +124,134 @@
 
     .card {
       position: relative;
-      overflow: hidden;
+      min-height: 410px;
       padding: 37px 35px 32px;
       border: 1px solid #fff3d88c;
       border-radius: 7px 7px 20px 7px;
       color: var(--ink);
       background:
+        linear-gradient(115deg, transparent 20%, #fff8e76e 48%, transparent 72%),
         radial-gradient(ellipse at 0 0, #fff 0, transparent 45%),
         linear-gradient(145deg, #fffaf1, #f4e8d5);
       box-shadow: 0 24px 80px #07091870, 0 2px 5px #fff5 inset;
       text-align: left;
+      transform-style: preserve-3d;
+    }
+
+    .card-content {
+      position: relative;
+      padding-bottom: 82px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .55s ease, visibility .55s;
+    }
+
+    .photo-note {
+      position: absolute;
+      right: 3px;
+      bottom: 0;
+      width: 104px;
+      margin: 0;
+      padding: 5px;
+      border: 1px solid #e4d9c7;
+      border-radius: 9px;
+      background: #fffdf8;
+      box-shadow: 0 7px 17px #49334824;
+      transform: rotate(3deg);
+    }
+
+    .photo-note img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .card-cover {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      background:
+        linear-gradient(115deg, transparent 20%, #fff8e76e 48%, transparent 72%),
+        radial-gradient(ellipse at 0 0, #fff 0, transparent 45%),
+        linear-gradient(145deg, #fffaf1, #f4e8d5);
+      border: 1px solid #fff3d88c;
+      border-radius: 6px 6px 19px 6px;
+      backface-visibility: hidden;
+      box-shadow: 0 15px 28px #4333482b, 0 2px 5px #fff7 inset;
+      transform-origin: top center;
+      transition:
+        transform .9s cubic-bezier(.2, .75, .25, 1),
+        opacity .35s ease .52s,
+        visibility 0s linear .9s;
+      will-change: transform;
+    }
+
+    .card-cover::before {
+      position: absolute;
+      inset: 13px;
+      border: 1px solid #d7bf9d;
+      border-radius: 4px 4px 14px 4px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .card-cover::after {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      border: 1px solid #d4b77d;
+      border-radius: 50%;
+      background: #fff8e9;
+      color: #a77e4c;
+      content: "✿";
+      font-size: 1.35rem;
+      line-height: 42px;
+      text-align: center;
+      transform: translateX(-50%);
+    }
+
+    .cover-flower {
+      margin-bottom: 14px;
+      font-size: 3.2rem;
+      filter: drop-shadow(0 5px 9px #ad708344);
+    }
+
+    .cover-caption {
+      margin: 0 0 11px;
+      color: #a77e4c;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .cover-title {
+      max-width: 300px;
+      margin: 0;
+      color: #493348;
+      font-size: clamp(1.55rem, 5vw, 2rem);
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .card.is-open .card-content {
+      animation: message-arrive .7s .45s both;
+      visibility: visible;
+    }
+
+    .card.is-open .card-cover {
+      opacity: .18;
+      transform: rotateX(-165deg);
+      visibility: hidden;
+      pointer-events: none;
     }
 
     .card::after {
@@ -226,6 +345,12 @@
       animation: card-glow .8s ease-out;
     }
 
+    .card-cover .open-button {
+      position: relative;
+      z-index: 1;
+      margin-top: 25px;
+    }
+
     .hint {
       margin: 17px 0 0;
       color: #d8cddd;
@@ -263,14 +388,51 @@
       45% { box-shadow: 0 24px 90px #f2bd6a38, 0 2px 5px #fff5 inset; }
     }
 
+    @keyframes message-arrive {
+      from { opacity: 0; transform: translateY(16px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
     @media (max-width: 480px) {
-      main { padding: 36px 20px 70px; }
-      .intro { margin-bottom: 22px; }
-      .card { padding: 31px 24px 27px; }
-      .flower-one { left: -13px; }
-      .flower-two { right: -11px; }
-      .flower-four { left: -15px; }
+      main {
+        min-height: 100svh;
+        justify-content: flex-start;
+        padding: 34px 18px 20px;
+      }
+      .intro { width: 100%; margin-bottom: 25px; }
+      .eyebrow { font-size: .65rem; letter-spacing: .16em; }
+      h1 { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+      .subtitle { max-width: 330px; margin-right: auto; margin-left: auto; line-height: 1.5; }
+      .card-wrap { width: 100%; max-width: 390px; }
+      .card { min-height: clamp(365px, 58svh, 430px); padding: 27px 22px 25px; }
+      .card.is-open { min-height: 0; }
+      .card::after { right: 0; }
+      .card-content { padding-bottom: 70px; }
+      .photo-note { right: 2px; width: 88px; }
+      .card-cover { padding: 28px 22px 50px; }
+      .card-cover::after { bottom: 11px; width: 36px; height: 36px; font-size: 1.1rem; line-height: 34px; }
+      .cover-flower { font-size: 2.8rem; }
+      .cover-title { font-size: clamp(1.4rem, 6.4vw, 1.7rem); }
+      .card-top { gap: 8px; font-size: .63rem; letter-spacing: .13em; }
+      .card h2 { font-size: clamp(1.45rem, 6.5vw, 1.8rem); }
+      .message { font-size: .96rem; line-height: 1.7; }
+      .signature { font-size: 1rem; }
+      .open-button { min-height: 50px; padding: 0 22px; }
+      .hint { line-height: 1.5; }
+      footer { position: static; margin-top: auto; padding-top: 30px; }
+      .flower-one { left: 3px; }
+      .flower-two { right: 3px; }
+      .flower-four { left: 3px; }
       .flower { font-size: 1.9rem; }
+    }
+
+    @media (max-width: 360px) {
+      main { padding-right: 14px; padding-left: 14px; }
+      .card { padding-right: 18px; padding-left: 18px; }
+      .card-cover { padding-right: 18px; padding-left: 18px; }
+      .flower-one { left: 3px; }
+      .flower-two { right: 3px; }
+      .flower-four { left: 3px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -298,25 +460,35 @@
       <span class="flower flower-three" aria-hidden="true">🌷</span>
       <span class="flower flower-four" aria-hidden="true">🌺</span>
       <article class="card" id="greeting-card">
-        <div class="card-top">Thân thương gửi chị</div>
-        <h2>Chúc chị em phụ nữ<br>ngày 20/10 thật vui!</h2>
-        <p class="message">
-          Chúc những người phụ nữ tuyệt vời luôn rạng rỡ,
-          tự tin và ngập tràn yêu thương trong mỗi ngày.
-          <br><br>
-          Mong mọi điều dịu dàng và hạnh phúc nhất
-          sẽ luôn ở bên chị em!
-        </p>
-        <p class="signature">Thương chúc chị em ♡</p>
-        <button class="open-button" id="wish-button" type="button">
-          <span aria-hidden="true">✨</span>
-          <span id="button-label">Gửi lời chúc &amp; thắp pháo hoa</span>
-        </button>
+        <div class="card-content" id="card-content" aria-hidden="true">
+          <div class="card-top">Thân thương gửi chị em</div>
+          <h2 id="greeting-title" tabindex="-1">Chúc chị em luôn<br>được yêu thương</h2>
+          <p class="message">
+            Chúc chị em luôn được yêu thương — không chỉ hôm nay, mà cả trong những ngày bình thường nhất.
+            Mong mọi dịu dàng chị em trao đi sẽ được đáp lại bằng sự trân trọng và chân thành.
+            <br><br>
+            Chúc chị em có bình yên để mỉm cười, bản lĩnh theo đuổi điều mình tin,
+            và tự do sống cuộc đời khiến mình hạnh phúc. Chị em xứng đáng với mọi điều tốt đẹp.
+          </p>
+          <p class="signature">Thương chúc chị em luôn rạng rỡ theo cách riêng mình ♡</p>
+          <figure class="photo-note">
+            <img src="photo-gui-yeu-thuong.jpg" alt="Hình chibi gửi nụ hôn và trái tim">
+          </figure>
+        </div>
+        <div class="card-cover" id="card-cover">
+          <span class="cover-flower" aria-hidden="true">💐</span>
+          <p class="cover-caption">Một món quà nhỏ</p>
+          <h2 class="cover-title">Gửi tặng chị em phụ nữ<br>ngàn lời yêu thương</h2>
+          <button class="open-button" id="wish-button" type="button">
+            <span aria-hidden="true">✨</span>
+            <span id="button-label">Nhấn vào đi</span>
+          </button>
+        </div>
       </article>
-      <p class="hint" id="wish-hint" aria-live="polite">Nhấn nút để gửi lời chúc đến chị em</p>
+      <p class="hint" id="wish-hint" aria-live="polite">Lời chúc đang chờ chị em phía trong 💌</p>
     </section>
 
-    <footer>20 · 10 &nbsp; ✦ &nbsp; Chúc chị em luôn rạng rỡ</footer>
+    <footer>20 · 10 &nbsp; ✦ &nbsp; Chúc chị em luôn được yêu thương</footer>
   </main>
 
   <script>
@@ -325,6 +497,9 @@
       const context = canvas.getContext("2d");
       const button = document.getElementById("wish-button");
       const card = document.getElementById("greeting-card");
+      const cardContent = document.getElementById("card-content");
+      const cardCover = document.getElementById("card-cover");
+      const greetingTitle = document.getElementById("greeting-title");
       const hint = document.getElementById("wish-hint");
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       const particles = [];
@@ -407,17 +582,15 @@
       animate();
 
       button.addEventListener("click", () => {
-        card.classList.remove("is-open");
-        void card.offsetWidth;
+        if (card.classList.contains("is-open")) return;
         card.classList.add("is-open");
-        hint.textContent = "Lời chúc đã được gửi — chúc chị em ngày 20/10 thật rạng rỡ! ✨";
-        launchCelebration();
+        cardContent.removeAttribute("aria-hidden");
+        cardCover.setAttribute("aria-hidden", "true");
+        button.disabled = true;
+        window.setTimeout(() => greetingTitle.focus(), 650);
+        hint.textContent = "Mong mỗi ngày của chị em đều ngập tràn yêu thương và niềm vui ✨";
+        window.setTimeout(launchCelebration, 520);
       });
-
-      window.setTimeout(() => {
-        burst(width * 0.22, height * 0.24, 34);
-        burst(width * 0.79, height * 0.2, 34);
-      }, 700);
     })();
   </script>
 </body>
